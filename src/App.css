@@ -1,3 +1,4 @@
+/* Base styles */
 .app {
   font-family: Arial, sans-serif;
   padding: 20px;
@@ -5,7 +6,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
 }
 
 .title {
@@ -18,10 +20,14 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
 }
 
 .search-box {
   position: relative;
+  flex: 2;
 }
 
 .search-icon {
@@ -34,11 +40,12 @@
 
 .todo-input {
   padding: 10px 10px 10px 30px;
-  width: 400px;
+  width: 100%;
   border: 2px solid #8e44ad;
   border-radius: 4px;
   outline: none;
   color: #8e44ad;
+  box-sizing: border-box;
 }
 
 .dropdown {
@@ -48,21 +55,19 @@
   background-color: #8e44ad;
   color: white;
   outline: none;
+  flex: 1;
+  box-sizing: border-box;
 }
 
-.toggle-button, .add-note-button, .apply-button, .cancel-button, .edit-button, .delete-button {
+.toggle-button {
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-
-.toggle-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: #8e44ad;
   color: white;
+  flex: 1;
+  box-sizing: border-box;
 }
 
 .add-note-button {
@@ -75,10 +80,10 @@
   justify-content: center;
   font-size: 24px;
   line-height: 1;
-  margin-top: 10px;
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 20px;
+  box-sizing: border-box;
 }
 
 .add-note-button svg {
@@ -91,7 +96,9 @@
   border-radius: 8px;
   margin-bottom: 20px;
   text-align: center;
-  width: 400px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
 }
 
 .form-card h2 {
@@ -105,6 +112,7 @@
   border-radius: 4px;
   outline: none;
   margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .form-buttons {
@@ -136,11 +144,14 @@
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .todo-list {
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .todo-item {
@@ -148,18 +159,28 @@ ul {
   align-items: center;
   justify-content: space-between;
   background: #e0e0e0;
+  color: black;
   padding: 10px;
   border-radius: 4px;
   margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.todo-item-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
 }
 
 .todo-item span {
   flex: 1;
   margin-left: 10px;
   cursor: pointer;
+  word-break: break-word; /* Ensure long text breaks appropriately */
 }
 
 .todo-item input[type="checkbox"] {
+  margin-right: 10px;
   cursor: pointer;
 }
 
@@ -186,67 +207,107 @@ button {
   color: gray;
 }
 
-/* Common styles for light and dark modes */
-.todo-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #e0e0e0; /* Light gray background for light mode */
-  color: black; /* Text color for light mode */
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 10px;
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .controls {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .search-box, .dropdown, .toggle-button {
+    flex: 1 1 100%;
+  }
+
+  .form-card {
+    width: 90%;
+  }
 }
 
-.todo-item span {
-  flex: 1;
-  margin-left: 10px;
-  cursor: pointer;
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    margin-bottom: 10px;
+  }
+
+  .todo-input, .dropdown, .toggle-button {
+    width: 100%;
+  }
+
+  .toggle-button {
+    margin-top: 10px;
+  }
+
+  .add-note-button {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .form-card {
+    width: 90%;
+  }
 }
 
-/* Dark mode specific styles */
-.dark-mode .todo-item {
-  background: #333; /* Dark background for dark mode */
-  color: white; /* White text for dark mode */
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .add-note-button {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .todo-item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+
+  .todo-item-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  .todo-item span {
+    flex: 1;
+    margin-left: 10px;
+    word-break: break-word; /* Ensure long text breaks appropriately */
+  }
+
+  .todo-buttons {
+    gap: 3px;
+  }
+
+  .form-card {
+    width: 95%;
+  }
 }
 
-.dark-mode .todo-item.completed {
-  text-decoration: line-through;
-  color: gray; /* Gray color for completed todos in dark mode */
-}
-
-.dark-mode .todo-item input[type="checkbox"] {
-  accent-color: #8e44ad; /* Custom checkbox color for dark mode */
-}
-
-/* Ensure the form card and input have good contrast */
-.dark-mode .form-card {
-  background: #444; /* Darker background for the form card */
-  color: white; /* White text for form card */
-}
-
-.dark-mode .form-input, .dark-mode .todo-input {
-  background: #555; /* Darker background for input fields */
-  color: white; /* White text for input fields */
-  border-color: #8e44ad; /* Border color for input fields */
-}
-
-/* Ensure the button colors are visible in dark mode */
-.dark-mode .apply-button {
-  background-color: #8e44ad;
-}
-
-.dark-mode .cancel-button {
-  background-color: #555;
-  color: white;
-}
-
-.dark-mode .toggle-button {
-  background-color: #8e44ad;
-  color: white;
-}
-
-.dark-mode .add-note-button {
-  background-color: #3498db;
-  color: white;
+/* Desktop specific styles */
+@media (min-width: 1025px) {
+  .controls .search-box {
+    flex: 3;
+  }
+  .controls .dropdown, .controls .toggle-button {
+    flex: 1;
+  }
+  .todo-list {
+    margin: 0 auto; /* Center the todo list */
+  }
 }
